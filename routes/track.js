@@ -5,23 +5,14 @@ const prisma = require("../config/db");
 // Track opened (clicked Hire Me)
 router.post("/", async (req, res) => {
 
-  const { type, name, company, email, message, analysis } = req.body;
+  const { type } = req.body;
 
   try {
 
-    const event = await prisma.lead.create({
-      data: {
-  name,
-  email,
-  company,
-  message,
-  analysis
-}
-    });
-
     res.json({
       success: true,
-      event
+      message: "Track recorded",
+      type
     });
 
   } catch (err) {
@@ -35,7 +26,6 @@ router.post("/", async (req, res) => {
   }
 
 });
-
 
 // Get all events for dashboard
 router.get("/events", async (req, res) => {
