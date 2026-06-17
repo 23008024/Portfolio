@@ -16,7 +16,10 @@ app.use(
     "/applications",
     require("./routes/applications")
 );
-
+app.use(
+    "/track",
+    require("./routes/track")
+);
 
 // AI analysis route
 app.post("/analyse", (req, res) => {
