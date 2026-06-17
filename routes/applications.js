@@ -20,11 +20,16 @@ router.post("/", async (req, res) => {
 
         const { name, email, company, message, analysis } = req.body;
 
-res.json({
-    success:true,
-    success: true,
-    lead
-});
+
+        const lead = await prisma.lead.create({
+            data: {
+                name,
+                email,
+                company,
+                message,
+                analysis
+            }
+        });
 
 
         await transporter.sendMail({
