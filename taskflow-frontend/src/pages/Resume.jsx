@@ -1,4 +1,5 @@
-const API = import.meta.env.VITE_API_URL;
+
+const WEB3FORMS_KEY = "5ce84b28-41c3-4979-973d-b9fd6df8041c";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 async function analyseWithClaude(form) {
@@ -29,86 +30,80 @@ export default function Resume() {
   const [copied, setCopied] = useState(false);
 
   // Track "opened"
-  useEffect(() => {
+  
+  const handleSend = async () => {
 
-  if (showModal) {
+  try {
 
-    fetch(`${API}/track`, {
+    const response = await fetch("https://api.web3forms.com/submit", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        Accept: "application/json"
       },
       body: JSON.stringify({
-        type: "opened"
+        access_key: WEB3FORMS_KEY,
+
+        name: form.name,
+        company: form.company,
+        email: form.email,
+        message: form.message,
+
+        subject: "New Portfolio Hire Me Request",
+
       })
     });
 
-  }
 
-}, [showModal]);
- const handleSend = async () => {
+    const result = await response.json();
 
-    const analysis = await analyseWithClaude(form);
-
-    await fetch(`${API}/applications`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-            name: form.name,
-            company: form.company,
-            email: form.email,
-            message: form.message,
-            analysis
-        })
-    });
+    console.log(result);
 
 
-    setSent(true);
+    if (result.success) {
 
+      setSent(true);
 
-    setTimeout(() => {
+      setTimeout(() => {
 
         setShowModal(false);
         setSent(false);
         setStep(1);
 
         setForm({
-            name: "",
-            company: "",
-            email: "",
-            message: ""
+          name: "",
+          company: "",
+          email: "",
+          message: ""
         });
 
-    }, 3000);
+      }, 3000);
 
-}; 
-  
-
-  
-  const resetModal = () => {
-    // Track dropped off if they didn't complete
-    if (!sent && step > 1) {
-      fetch(`${API}/track`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          type: "dropped",
-          name: form.name || null,
-          email: form.email || null,
-          company: form.company || null
-        })
-      });
     }
-    setShowModal(false);
-    setSent(false);
-    setStep(1);
-    setForm({ name: "", company: "", email: "", message: "" });
-  };
 
+  } catch(error) {
+
+    console.error(error);
+
+  }
+
+};
+const resetModal = () => {
+
+  setShowModal(false);
+  setSent(false);
+  setStep(1);
+
+  setForm({
+    name: "",
+    company: "",
+    email: "",
+    message: ""
+  });
+
+};
   
-
+  
   const canNext1 = form.name.trim() && form.email.trim();
   const canNext2 = form.message.trim();
   const steps = ["Who are you?", "Your message", "Confirm & send"];
@@ -347,7 +342,7 @@ export default function Resume() {
               <div className="modal-success">
                 <div style={{ fontSize: "52px" }}>📬</div>
                 <h3>You're all set!</h3>
-                <p>Email client opened with your message ready to send.</p>
+                <p>Your message has been sent successfully.</p>
               </div>
             ) : (
               <>
