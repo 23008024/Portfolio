@@ -9,15 +9,14 @@ router.post("/", async (req, res) => {
 
   try {
 
-    const event = await prisma.hireMeEvent.create({
+    const event = await prisma.lead.create({
       data: {
-        type,
-        name,
-        company,
-        email,
-        message,
-        analysis
-      }
+  name,
+  email,
+  company,
+  message,
+  analysis
+}
     });
 
     res.json({
