@@ -1,13 +1,15 @@
 generator client {
   provider = "prisma-client-js"
-binaryTargets = ["native", "debian-openssl-3.0.x"]
+  binaryTargets = [
+    "native",
+    "debian-openssl-3.0.x"
+  ]
 }
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
-
 
 model Lead {
   id String @id @default(cuid())
@@ -23,6 +25,6 @@ model Lead {
   roleType         String?
 
   analysis  Json?
-  status    String @default("new")
+  status    String   @default("new")
   createdAt DateTime @default(now())
 }
