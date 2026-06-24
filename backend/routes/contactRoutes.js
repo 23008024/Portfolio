@@ -1,65 +1,17 @@
 const express = require("express");
 const router = express.Router();
 
-const nodemailer = require("nodemailer");
+const { Resend } = require("resend");
 
-
-// Gmail transporter
-const transporter = nodemailer.createTransport({
-
-    host: "142.250.152.108",
-
-    port: 587,
-
-    secure: false,
-
-    auth: {
-
-        user: process.env.EMAIL_USER,
-
-        pass: process.env.EMAIL_PASS
-
-    },
-
-    tls: {
-
-        servername: "smtp.gmail.com"
-
-    },
-
-    family: 4
-
-});
-
-console.log("EMAIL_USER:", process.env.EMAIL_USER);
-console.log("EMAIL_PASS EXISTS:", !!process.env.EMAIL_PASS);
-
-
-// Check Gmail connection when server starts
-transporter.verify((error, success) => {
-
-    if (error) {
-
-        console.error("GMAIL CONNECTION ERROR:", error.message);
-
-    } else {
-
-        console.log("GMAIL SERVER READY");
-
-    }
-
-});
-
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 
 router.post("/", async (req, res) => {
-
 
     console.log("BODY RECEIVED:", req.body);
 
 
     try {
-
 
         const {
             name,
@@ -69,113 +21,79 @@ router.post("/", async (req, res) => {
         } = req.body;
 
 
-
         if (!name || !email || !message) {
 
             return res.status(400).json({
-
-                success: false,
-
-                message: "Name, email and message are required"
-
+                success:false,
+                message:"Name, email and message are required"
             });
 
         }
 
 
-
         console.log("Sending email...");
 
 
+        const result = await resend.emails.send({
 
-        const info = await transporter.sendMail({
-
-
-            from: process.env.EMAIL_USER,
-
+            from: "Portfolio <onboarding@resend.dev>",
 
             to: process.env.EMAIL_USER,
 
-
-            replyTo: email,
-
+            reply_to: email,
 
             subject: "New Portfolio Contact Message",
-
-
 
             html: `
 
                 <h2>New Contact Message</h2>
 
+                <p><b>Name:</b> ${name}</p>
 
-                <p>
-                    <strong>Name:</strong> ${name}
-                </p>
+                <p><b>Email:</b> ${email}</p>
 
+                <p><b>Company:</b> ${company || "N/A"}</p>
 
-                <p>
-                    <strong>Email:</strong> ${email}
-                </p>
+                <p><b>Message:</b></p>
 
-
-                <p>
-                    <strong>Company:</strong> ${company || "N/A"}
-                </p>
-
-
-                <p>
-                    <strong>Message:</strong>
-                </p>
-
-
-                <p>
-                    ${message}
-                </p>
+                <p>${message}</p>
 
             `
 
         });
 
 
-
-        console.log("EMAIL SENT:", info.messageId);
-
+        console.log("EMAIL SENT:", result);
 
 
-        return res.status(200).json({
+        return res.json({
 
-            success: true,
+            success:true,
 
-            message: "Message sent successfully"
+            message:"Message sent successfully"
 
         });
 
 
-
-    } catch (error) {
+    } catch(error) {
 
 
         console.error("EMAIL ERROR:", error);
 
 
-
         return res.status(500).json({
 
-            success: false,
+            success:false,
 
-            message: "Failed to send email",
+            message:"Failed to send email",
 
-            error: error.message
+            error:error.message
 
         });
 
-
     }
 
-
 });
-
 
 
 module.exports = router;
