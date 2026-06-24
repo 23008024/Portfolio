@@ -1,16 +1,32 @@
 const express = require("express");
 const router = express.Router();
 
-const { Resend } = require("resend");
+const nodemailer = require("nodemailer");
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+
+const transporter = nodemailer.createTransport({
+
+    service: "gmail",
+
+    auth: {
+
+        user: process.env.EMAIL_USER,
+
+        pass: process.env.EMAIL_PASS
+
+    }
+
+});
 
 
 router.post("/", async (req, res) => {
 
+
     console.log("BODY RECEIVED:", req.body);
 
+
     try {
+
 
         const {
             name,
@@ -24,9 +40,9 @@ router.post("/", async (req, res) => {
 
             return res.status(400).json({
 
-                success: false,
+                success:false,
 
-                message: "Name, email and message are required"
+                message:"Name, email and message are required"
 
             });
 
@@ -36,94 +52,63 @@ router.post("/", async (req, res) => {
         console.log("Sending email...");
 
 
-        const result = await resend.emails.send({
+        await transporter.sendMail({
 
-            // Resend testing sender
-            from: "Portfolio <onboarding@resend.dev>",
+            from: process.env.EMAIL_USER,
 
-            // Your Gmail inbox
             to: "mudaunaftali@gmail.com",
 
-            // Visitor email
-            reply_to: email,
-
+            replyTo: email,
 
             subject: "New Portfolio Contact Message",
-
 
             html: `
 
                 <h2>New Contact Message</h2>
 
-                <p>
-                    <strong>Name:</strong> ${name}
-                </p>
+                <p><b>Name:</b> ${name}</p>
 
-                <p>
-                    <strong>Email:</strong> ${email}
-                </p>
+                <p><b>Email:</b> ${email}</p>
 
-                <p>
-                    <strong>Company:</strong> ${company || "N/A"}
-                </p>
+                <p><b>Company:</b> ${company || "N/A"}</p>
 
-                <p>
-                    <strong>Message:</strong>
-                </p>
+                <p><b>Message:</b></p>
 
-                <p>
-                    ${message}
-                </p>
+                <p>${message}</p>
 
             `
 
         });
 
 
-        if (result.error) {
-
-            console.error("RESEND ERROR:", result.error);
-
-            return res.status(500).json({
-
-                success: false,
-
-                message: result.error.message
-
-            });
-
-        }
+        console.log("EMAIL SENT SUCCESSFULLY");
 
 
-        console.log("EMAIL SENT:", result.data);
+        res.json({
 
+            success:true,
 
-        return res.status(200).json({
-
-            success: true,
-
-            message: "Message sent successfully"
+            message:"Message sent successfully"
 
         });
 
 
-    } catch (error) {
+    } catch(error) {
 
 
         console.error("EMAIL ERROR:", error);
 
 
-        return res.status(500).json({
+        res.status(500).json({
 
-            success: false,
+            success:false,
 
-            message: "Failed to send email",
-
-            error: error.message
+            message:error.message
 
         });
 
     }
+
 
 });
 
