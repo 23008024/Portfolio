@@ -3,6 +3,7 @@ const router = express.Router();
 
 const nodemailer = require("nodemailer");
 
+
 const transporter = nodemailer.createTransport({
 
     host: "smtp.gmail.com",
@@ -19,24 +20,36 @@ const transporter = nodemailer.createTransport({
 
         pass: process.env.EMAIL_PASS
 
-    },
+    }
 
-    tls: {
+});
 
-        rejectUnauthorized: false
+
+// Test Gmail connection
+
+transporter.verify((error)=>{
+
+    if(error){
+
+        console.log("GMAIL ERROR:", error.message);
+
+    } else {
+
+        console.log("GMAIL READY");
 
     }
 
 });
 
 
-router.post("/", async (req, res) => {
+
+router.post("/", async(req,res)=>{
 
 
     console.log("BODY RECEIVED:", req.body);
 
 
-    try {
+    try{
 
 
         const {
@@ -47,21 +60,6 @@ router.post("/", async (req, res) => {
         } = req.body;
 
 
-        if (!name || !email || !message) {
-
-            return res.status(400).json({
-
-                success:false,
-
-                message:"Name, email and message are required"
-
-            });
-
-        }
-
-
-        console.log("Sending email...");
-
 
         await transporter.sendMail({
 
@@ -71,50 +69,48 @@ router.post("/", async (req, res) => {
 
             replyTo: email,
 
-            subject: "New Portfolio Contact Message",
+            subject:"Portfolio Contact Message",
 
-            html: `
+            html:`
 
-                <h2>New Contact Message</h2>
+            <h2>New Message</h2>
 
-                <p><b>Name:</b> ${name}</p>
+            <p><b>Name:</b>${name}</p>
 
-                <p><b>Email:</b> ${email}</p>
+            <p><b>Email:</b>${email}</p>
 
-                <p><b>Company:</b> ${company || "N/A"}</p>
+            <p><b>Company:</b>${company}</p>
 
-                <p><b>Message:</b></p>
-
-                <p>${message}</p>
+            <p><b>Message:</b>${message}</p>
 
             `
 
         });
 
 
-        console.log("EMAIL SENT SUCCESSFULLY");
+
+        console.log("EMAIL SENT");
 
 
         res.json({
 
-            success:true,
-
-            message:"Message sent successfully"
+            success:true
 
         });
 
 
-    } catch(error) {
+
+    }catch(error){
 
 
-        console.error("EMAIL ERROR:", error);
+        console.log("SEND ERROR:",error);
 
 
         res.status(500).json({
 
             success:false,
 
-            message:error.message
+            error:error.message
 
         });
 
@@ -125,3 +121,4 @@ router.post("/", async (req, res) => {
 
 
 module.exports = router;
+
