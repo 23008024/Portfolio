@@ -76,20 +76,38 @@ contactForm.addEventListener("submit", async (event) => {
         );
 
 
-
-        if (response.ok) {
-
-
-            alert("Message sent successfully 🚀");
+if (response.ok) {
 
 
-            contactForm.reset();
+    contactForm.innerHTML = `
+
+        <div class="success-message">
+
+            <i class="fa-solid fa-circle-check"></i>
+
+            <h2>Message Sent 🚀</h2>
+
+            <p>
+                Thank you for contacting me.
+                I will get back to you soon.
+            </p>
+
+        </div>
+
+    `;
 
 
-            contactPopup.style.display = "none";
+    setTimeout(() => {
+
+        contactPopup.style.display = "none";
+
+        location.reload();
+
+    }, 3000);
 
 
-        } else {
+}
+         else {
 
 
             alert("Failed to send message. Please try again.");
