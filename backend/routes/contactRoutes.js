@@ -1,23 +1,29 @@
 const express = require("express");
 const router = express.Router();
 
-const { PrismaClient } = require("@prisma/client");
 const nodemailer = require("nodemailer");
 
-const prisma = new PrismaClient();
 
 // Gmail transporter
 const transporter = nodemailer.createTransport({
+
     service: "gmail",
+
     auth: {
+
         user: process.env.EMAIL_USER,
+
         pass: process.env.EMAIL_PASS
+
     }
+
 });
+
 
 router.post("/", async (req, res) => {
 
     console.log("BODY RECEIVED:", req.body);
+
 
     try {
 
@@ -28,56 +34,68 @@ router.post("/", async (req, res) => {
             message
         } = req.body;
 
-        // Save to PostgreSQL
-        const lead = await prisma.lead.create({
-            data: {
-                name,
-                email,
-                company,
-                message
-            }
-        });
 
-        // Send email notification
+        console.log("Sending email...");
+
+
         const info = await transporter.sendMail({
+
             from: process.env.EMAIL_USER,
-            to: process.env.EMAIL_USER, // receive in your own inbox
-            subject: "New Contact Form Submission",
+
+            to: process.env.EMAIL_USER,
+
+            subject: "New Portfolio Contact Message",
+
             html: `
+
                 <h2>New Contact Message</h2>
 
-                <p><strong>Name:</strong> ${name}</p>
+                <p><b>Name:</b> ${name}</p>
 
-                <p><strong>Email:</strong> ${email}</p>
+                <p><b>Email:</b> ${email}</p>
 
-                <p><strong>Company:</strong> ${company || "N/A"}</p>
+                <p><b>Company:</b> ${company || "N/A"}</p>
 
-                <p><strong>Message:</strong></p>
+                <p><b>Message:</b></p>
 
                 <p>${message}</p>
+
             `
+
         });
+
 
         console.log("Email sent:", info.messageId);
 
+
         res.status(200).json({
+
             success: true,
-            message: "Message sent successfully",
-            lead
+
+            message: "Message sent successfully"
+
         });
 
-    } catch (error) {
 
-        console.error("ERROR:", error);
+    } catch(error) {
+
+
+        console.error("EMAIL ERROR:", error);
+
 
         res.status(500).json({
-            success: false,
-            message: "Failed to process contact form",
-            error: error.message
+
+            success:false,
+
+            message:"Failed to send email",
+
+            error:error.message
+
         });
 
     }
 
 });
+
 
 module.exports = router;
