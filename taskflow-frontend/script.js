@@ -26,7 +26,7 @@ const contactForm = document.getElementById("contactForm");
 
 
 // Your Render backend API URL
-const API_URL = "https://portfo-5ol1.onrender.com/api/contact";
+const API_URL = "https://portfolio-ocsd.onrender.com";
 
 
 contactForm.addEventListener("submit", async (event) => {
