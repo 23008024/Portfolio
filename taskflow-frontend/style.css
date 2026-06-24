@@ -775,4 +775,35 @@ nav ul li a:hover::after {
 
     border: 3px solid #2563eb;
 
+}.success-message {
+
+    text-align: center;
+
+    padding: 30px;
+
+}
+
+
+.success-message i {
+
+    font-size: 50px;
+
+    color: #00ff88;
+
+    margin-bottom: 20px;
+
+}
+
+
+.success-message h2 {
+
+    margin-bottom: 10px;
+
+}
+
+
+.success-message p {
+
+    opacity: 0.8;
+
 }
