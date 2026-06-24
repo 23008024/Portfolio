@@ -17,7 +17,8 @@ const transporter = nodemailer.createTransport({
 
     }
 
-});
+});console.log("EMAIL_USER:", process.env.EMAIL_USER);
+console.log("EMAIL_PASS EXISTS:", !!process.env.EMAIL_PASS);
 
 
 // Check Gmail connection when server starts
