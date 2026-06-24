@@ -58,10 +58,10 @@ contactForm.addEventListener("submit", async (event) => {
 
     };
 
-
+const API_URL = "https://portfo-5ol1.onrender.com/api/contact";
     try {
 
-        const response = await fetch(API_URL, {
+        const response = await fetch(API_URL;, {
 
             method: "POST",
 
