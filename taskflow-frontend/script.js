@@ -3,30 +3,34 @@ const closeContact = document.getElementById("closeContact");
 const contactPopup = document.getElementById("contactPopup");
 
 
+// Open popup
 openContact.addEventListener("click", () => {
     contactPopup.style.display = "flex";
 });
 
 
+// Close popup
 closeContact.addEventListener("click", () => {
     contactPopup.style.display = "none";
 });
 
 
+// Close when clicking outside
 window.addEventListener("click", (event) => {
+
     if (event.target === contactPopup) {
+
         contactPopup.style.display = "none";
+
     }
+
 });
 
 
-// Contact form submission
+
+// Formspree contact form
 
 const contactForm = document.getElementById("contactForm");
-
-
-// Your Render backend API URL
-const API_URL = "https://portfolio-ocsd.onrender.com/api/contact";
 
 
 contactForm.addEventListener("submit", async (event) => {
@@ -39,74 +43,75 @@ contactForm.addEventListener("submit", async (event) => {
 
     submitButton.disabled = true;
 
+
     submitButton.innerHTML = `
         <i class="fa-solid fa-spinner fa-spin"></i>
         Sending...
     `;
 
 
+
     const formData = new FormData(contactForm);
 
-
-    const data = {
-
-        name: formData.get("name"),
-
-        email: formData.get("email"),
-
-        company: formData.get("company"),
-
-        message: formData.get("message")
-
-    };
 
 
     try {
 
-        const response = await fetch(API_URL, {
 
-            method: "POST",
+        const response = await fetch(
+            "https://formspree.io/f/mojojwgg",
+            {
 
-            headers: {
+                method: "POST",
 
-                "Content-Type": "application/json"
+                body: formData,
 
-            },
+                headers: {
 
-            body: JSON.stringify(data)
+                    "Accept": "application/json"
 
-        });
+                }
+
+            }
+        );
 
 
-        const result = await response.json();
 
+        if (response.ok) {
 
-        if (response.ok && result.success) {
 
             alert("Message sent successfully 🚀");
 
+
             contactForm.reset();
+
 
             contactPopup.style.display = "none";
 
 
         } else {
 
-            alert(result.message || "Failed to send message");
+
+            alert("Failed to send message. Please try again.");
 
         }
 
 
+
     } catch (error) {
 
-        console.error("Connection error:", error);
 
-        alert("Cannot connect to server. Please check that the API is running.");
+        console.error("FORM ERROR:", error);
+
+
+        alert("Something went wrong. Please try again.");
 
     }
 
 
+
     finally {
+
 
         submitButton.disabled = false;
 
@@ -116,6 +121,8 @@ contactForm.addEventListener("submit", async (event) => {
             Send Message
         `;
 
+
     }
+
 
 });
