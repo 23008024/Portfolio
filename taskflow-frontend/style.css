@@ -806,4 +806,69 @@ nav ul li a:hover::after {
 
     opacity: 0.8;
 
+}.navbar{
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px 5%;
+    background:#111827;
+    color:white;
+
+}
+
+
+.logo{
+
+    font-size:22px;
+    font-weight:bold;
+
+}
+
+
+.hamburger{
+
+    font-size:28px;
+    cursor:pointer;
+
+}
+
+
+
+.menu{
+
+    position:absolute;
+    right:5%;
+    top:65px;
+    background:white;
+    width:180px;
+    display:none;
+    flex-direction:column;
+    border-radius:10px;
+    box-shadow:0 5px 15px #ccc;
+    overflow:hidden;
+
+}
+
+
+.menu a{
+
+    padding:12px;
+    color:#333;
+    text-decoration:none;
+
+}
+
+
+.menu a:hover{
+
+    background:#f1f5f9;
+
+}
+
+
+.menu.show{
+
+    display:flex;
+
 }
