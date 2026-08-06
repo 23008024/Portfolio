@@ -99,44 +99,48 @@ img { max-width: 100%; display: block; }
    quietly so it doesn't compete with the real portfolio header
    below. Safe to delete the .navbar markup from index.html if
    you don't need it. */
-.navbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0.9rem var(--gutter);
-    background: var(--ink-900);
-    border-bottom: 1px solid var(--line);
-    font-family: var(--font-mono);
-    font-size: 0.85rem;
+/* Mobile Menu Button */
+.menu-btn{
+    display:none;
+    font-size:1.8rem;
+    color:#fff;
+    cursor:pointer;
 }
 
-.navbar .logo {
-    font-family: var(--font-display);
-    font-weight: 700;
-    color: var(--amber);
-    letter-spacing: 0.02em;
+/* Desktop */
+.nav-links{
+    display:flex;
+    gap:2rem;
+    list-style:none;
 }
 
-.navbar .menu {
-    display: flex;
-    gap: 1.5rem;
-}
+/* Mobile */
+@media (max-width:768px){
 
-.navbar .menu a {
-    color: var(--text-dim);
-    transition: color 0.2s var(--ease);
-}
+    .menu-btn{
+        display:block;
+    }
 
-.navbar .menu a:hover,
-.navbar .menu a:focus-visible {
-    color: var(--amber);
-}
+    .nav-links{
 
-.navbar .hamburger {
-    display: none;
-    cursor: pointer;
-    font-size: 1.4rem;
-    color: var(--text);
+        display:none;
+        position:absolute;
+        top:70px;
+        left:0;
+        width:100%;
+        background:#111827;
+        flex-direction:column;
+        align-items:center;
+        padding:25px 0;
+        gap:20px;
+        z-index:999;
+
+    }
+
+    .nav-links.active{
+        display:flex;
+    }
+
 }
 /* ---------- Real header / nav ---------- */
 header {
