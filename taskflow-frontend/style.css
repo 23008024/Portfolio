@@ -1,10 +1,3 @@
-/* =========================================================
-   Mudau Naftali Dakalo — Portfolio
-   Theme: "dev console" — ink-navy panels, amber/teal accents,
-   monospace comment-style labels, dashed circuit rings.
-   ========================================================= */
-
-/* ---------- Tokens ---------- */
 :root {
   /* color */
   --ink-950: #0b1424;
@@ -265,6 +258,7 @@ header ul#menu li a:focus-visible::before, header ul#menu li a:focus-visible::af
   box-shadow: 0 8px 24px -10px rgba(79, 182, 168, 0.35);
 }
 
+/* ---------- Profile photo (hero) ---------- */
 .profile-box { display: flex; justify-content: center; }
 .circle {
   position: relative;
@@ -273,18 +267,37 @@ header ul#menu li a:focus-visible::before, header ul#menu li a:focus-visible::af
   border-radius: 50%;
   overflow: hidden;
   border: 1px solid var(--line);
+  box-shadow:
+    0 0 0 6px var(--ink-900),
+    0 0 0 7px var(--line),
+    0 20px 40px -14px rgba(0, 0, 0, 0.55);
+  transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease);
 }
 .circle::before {
   content: "";
   position: absolute;
   inset: -14px;
   border-radius: 50%;
-  border: 1.5px dashed var(--teal);
-  opacity: 0.55;
-  animation: spin 26s linear infinite;
+  border: 1.5px solid var(--teal);
+  opacity: 0.35;
+  pointer-events: none;
 }
-@keyframes spin { to { transform: rotate(360deg); } }
-.circle img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+.circle:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 0 0 6px var(--ink-900),
+    0 0 0 7px var(--amber),
+    0 24px 46px -14px rgba(0, 0, 0, 0.6);
+}
+.circle img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  filter: grayscale(15%) contrast(1.05);
+  transition: filter 0.35s var(--ease);
+}
+.circle:hover img { filter: grayscale(0%) contrast(1.08); }
 
 @media (max-width: 780px) {
   .hero { grid-template-columns: 1fr; text-align: left; }
@@ -462,6 +475,7 @@ header ul#menu li a:focus-visible::before, header ul#menu li a:focus-visible::af
   object-fit: cover;
   margin: 0 auto 1rem;
   border: 1px solid var(--line);
+  box-shadow: 0 0 0 4px var(--ink-800), 0 8px 20px -8px rgba(0, 0, 0, 0.5);
 }
 
 .contact-box h2 { font-size: 1.3rem; margin-bottom: 1.3rem; }

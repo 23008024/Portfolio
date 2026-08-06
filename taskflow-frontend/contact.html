@@ -1,118 +1,162 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link 
-    rel="stylesheet" 
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
+    <!-- Your CSS -->
     <link rel="stylesheet" href="style.css">
 
-    <title>Contact</title>
-
+    <title>Contact Me</title>
 </head>
-
 
 <body>
 
+<section class="contact">
 
-<button class="contact-btn" id="openContact">
+    <div class="contact-container">
 
-    <span>
-        Let's Work Together
-    </span>
+        <!-- ================= LEFT SIDE ================= -->
+        <div class="contact-info">
 
-    <i class="fa-solid fa-paper-plane"></i>
+            <div class="profile-image">
+                <img src="public/Nofi.jpg" alt="Naftali Mudau">
+            </div>
 
-</button>
+            <span class="tag">
+                <i class="fa-solid fa-circle"></i>
+                Available for Work
+            </span>
 
+            <h1>Let's Create Something Amazing.</h1>
 
+            <p>
+                Whether you have a software project, internship opportunity,
+                freelance work, or simply want to connect, I'd love to hear
+                from you. Let's build something meaningful together.
+            </p>
 
-<div class="contact-popup" id="contactPopup">
+            <div class="contact-details">
 
-<div class="contact-box">
+                <div class="detail">
+                    <i class="fa-solid fa-envelope"></i>
+                    <a href="mailto:mudaunaftali@gmail.com">
+                        mudaunaftali@gmail.com
+                    </a>
+                </div>
 
+                <div class="detail">
+                    <i class="fa-solid fa-phone"></i>
+                    <a href="tel:+27608158836">
+                        +27 60 815 8836
+                    </a>
+                </div>
 
-<span class="close-contact" id="closeContact">
+                <div class="detail">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <span>South Africa</span>
+                </div>
 
-    &times;
+            </div>
 
-</span>
+            <div class="social-links">
 
+                <a href="https://github.com/23008024/"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   title="GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
 
-<img src="public/Nofi.jpeg" class="contact-image" alt="Nafi">
+                <a href="https://www.linkedin.com/in/naftali-mudau-261a88314/"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   title="LinkedIn">
+                    <i class="fab fa-linkedin"></i>
+                </a>
 
+                <a href="mailto:mudaunaftali@gmail.com"
+                   title="Email">
+                    <i class="fa-solid fa-envelope"></i>
+                </a>
 
-<h2>
-    Send Me A Message
-</h2>
+            </div>
 
+        </div>
 
+        <!-- ================= RIGHT SIDE ================= -->
+        <div class="contact-form">
 
-<form 
-    id="contactForm"
-    action="https://formspree.io/f/mojojwgg"
-    method="POST"
->
+            <div class="form-header">
+                <h2>Send Me a Message</h2>
 
+                <p>
+                    Have an idea or opportunity? Fill out the form below and
+                    I'll get back to you as soon as possible.
+                </p>
+            </div>
 
-    <input 
-    type="text"
-    name="name"
-    placeholder="Your Name"
-    required>
+            <form id="contactForm"
+                  action="https://formspree.io/f/mojojwgg"
+                  method="POST">
 
+                <div class="input-group">
+                    <label for="name">Full Name</label>
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        placeholder="John Doe"
+                        required>
+                </div>
 
+                <div class="input-group">
+                    <label for="email">Email Address</label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="john@example.com"
+                        required>
+                </div>
 
-    <input 
-    type="email"
-    name="email"
-    placeholder="Your Email"
-    required>
+                <div class="input-group">
+                    <label for="company">Company (Optional)</label>
+                    <input
+                        type="text"
+                        id="company"
+                        name="company"
+                        placeholder="Company Name">
+                </div>
 
+                <div class="input-group">
+                    <label for="message">Your Message</label>
+                    <textarea
+                        id="message"
+                        name="message"
+                        rows="6"
+                        placeholder="Tell me about your project..."
+                        required></textarea>
+                </div>
 
+                <button type="submit" class="send-btn">
+                    <i class="fa-solid fa-paper-plane"></i>
+                    <span>Send Message</span>
+                </button>
 
-    <input 
-    type="text"
-    name="company"
-    placeholder="Company (Optional)">
+            </form>
 
+        </div>
 
+    </div>
 
-    <textarea
-    name="message"
-    placeholder="Your Message"
-    required></textarea>
-
-
-
-    <button type="submit" class="btn">
-
-        <i class="fa-solid fa-paper-plane"></i>
-
-        Send Message
-
-    </button>
-
-
-</form>
-
-
-</div>
-
-
-</div>
-
-
+</section>
 
 <script src="script.js"></script>
 
-
 </body>
-
 </html>

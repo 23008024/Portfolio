@@ -1,146 +1,65 @@
-const openContact = document.getElementById("openContact");
-const closeContact = document.getElementById("closeContact");
-const contactPopup = document.getElementById("contactPopup");
-
-
-// Open popup
-openContact.addEventListener("click", () => {
-    contactPopup.style.display = "flex";
-});
-
-
-// Close popup
-closeContact.addEventListener("click", () => {
-    contactPopup.style.display = "none";
-});
-
-
-// Close when clicking outside
-window.addEventListener("click", (event) => {
-
-    if (event.target === contactPopup) {
-
-        contactPopup.style.display = "none";
-
-    }
-
-});
-
-
-
-// Formspree contact form
-
 const contactForm = document.getElementById("contactForm");
 
+contactForm.addEventListener("submit", async (e) => {
 
-contactForm.addEventListener("submit", async (event) => {
+    e.preventDefault();
 
-    event.preventDefault();
+    const submitBtn = contactForm.querySelector(".send-btn");
 
+    submitBtn.disabled = true;
 
-    const submitButton = contactForm.querySelector("button");
-
-
-    submitButton.disabled = true;
-
-
-    submitButton.innerHTML = `
+    submitBtn.innerHTML = `
         <i class="fa-solid fa-spinner fa-spin"></i>
         Sending...
     `;
 
-
-
     const formData = new FormData(contactForm);
 
-
-
     try {
-
 
         const response = await fetch(
             "https://formspree.io/f/mojojwgg",
             {
-
                 method: "POST",
-
                 body: formData,
-
                 headers: {
-
                     "Accept": "application/json"
-
                 }
-
             }
         );
 
+        if (response.ok) {
 
-if (response.ok) {
+            contactForm.innerHTML = `
+                <div class="success-message">
+                    <i class="fa-solid fa-circle-check"></i>
+                    <h2>Message Sent!</h2>
+                    <p>
+                        Thank you for reaching out.
+                        I'll get back to you as soon as possible.
+                    </p>
+                </div>
+            `;
 
+        } else {
 
-    contactForm.innerHTML = `
-
-        <div class="success-message">
-
-            <i class="fa-solid fa-circle-check"></i>
-
-            <h2>Message Sent 🚀</h2>
-
-            <p>
-                Thank you for contacting me.
-                I will get back to you soon.
-            </p>
-
-        </div>
-
-    `;
-
-
-    setTimeout(() => {
-
-        contactPopup.style.display = "none";
-
-        location.reload();
-
-    }, 3000);
-
-
-}
-         else {
-
-
-            alert("Failed to send message. Please try again.");
+            throw new Error("Form submission failed.");
 
         }
 
-
-
     } catch (error) {
 
+        console.error(error);
 
-        console.error("FORM ERROR:", error);
+        submitBtn.disabled = false;
 
-
-        alert("Something went wrong. Please try again.");
-
-    }
-
-
-
-    finally {
-
-
-        submitButton.disabled = false;
-
-
-        submitButton.innerHTML = `
+        submitBtn.innerHTML = `
             <i class="fa-solid fa-paper-plane"></i>
             Send Message
         `;
 
+        alert("Unable to send your message. Please try again.");
 
     }
-
 
 });
