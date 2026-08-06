@@ -9,7 +9,7 @@
 
     <link rel="stylesheet" href="style.css">
 
-    <!-- Icons -->
+    
     <link 
     rel="stylesheet" 
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -19,36 +19,49 @@
 
 <body>
 
+    <header>
+
     <nav class="navbar">
 
-    <div class="logo">
-        Naftali
-    </div>
+        <div class="logo">
+            Naftali<span>.</span>
+        </div>
 
+        <ul class="nav-links">
 
-    <div class="hamburger" onclick="toggleMenu()">
-        ☰
-    </div>
+            <li><a href="#home">Home</a></li>
 
+            <li><a href="#about">About</a></li>
 
-    <div class="menu" id="menu">
+            <li><a href="#skills">Skills</a></li>
 
-        <a href="login.html">
-            Login
-        </a>
+            <li><a href="#experience">Experience</a></li>
 
-        <a href="register.html">
-            Register
-        </a>
+            <li><a href="#projects">Projects</a></li>
 
-        <a href="project.html">
-            Project
-        </a>
+            <li><a href="contact.html">Contact</a></li>
 
-    </div>
+        </ul>
 
+        <div class="nav-actions">
 
-</nav>
+            <a href="login.html" class="btn-outline">
+                Login
+            </a>
+
+            <a href="register.html" class="btn-primary">
+                Register
+            </a>
+
+        </div>
+
+        <div class="menu-btn" id="menuBtn">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+
+    </nav>
+
+</header>
 
 
 <header>
@@ -65,8 +78,8 @@
 <li><a href="#home">Home</a></li>
 <li><a href="#about">About</a></li>
     <li><a href="#education">Education</a></li>
+    <li><a href="#experience">Experience</a></li>
 <li><a href="#skills">Skills</a></li>
-<li><a href="#experience">Experience</a></li>
 <li><a href="#projects">Projects</a></li>
 <li><a href="#contact">Contact</a></li>
     
@@ -406,72 +419,79 @@ Projects
 
     <span>Full-Stack Web Development</span>
 
-    <h3>NovaStore — Full-Stack E-Commerce Platform</h3>
+            <h3>NovaStore — Full-Stack E-Commerce Platform</h3>
 
-    <p>
-        A full-stack e-commerce platform built with PHP and MySQL, featuring
-        secure authentication, product management, shopping cart functionality,
-        order processing, and an administrative dashboard.
-    </p>
+            <p>
+                A full-stack e-commerce platform built with PHP and MySQL, featuring
+                secure authentication, product management, shopping cart functionality,
+                order processing, and an administrative dashboard.
+            </p>
 
-    <ul>
-        <li>Implemented JWT-based authentication with role-based access control (RBAC) for customer and administrator accounts.</li>
+            <ul>
+                <li>Implemented JWT-based authentication with role-based access control (RBAC) for customer and administrator accounts.</li>
 
-        <li>Reduced database query execution time by approximately 40% through index optimisation.</li>
+                <li>Reduced database query execution time by approximately 40% through index optimisation.</li>
 
-        <li>Built product search with category filtering and pagination for efficient catalogue browsing.</li>
+                <li>Built product search with category filtering and pagination for efficient catalogue browsing.</li>
 
-        <li>Designed and integrated backend business logic with a responsive frontend supporting products, users, carts and orders.</li>
+                <li>Designed and integrated backend business logic with a responsive frontend supporting products, users, carts and orders.</li>
 
-        <li>Deployed the application to production using Render.</li>
-    </ul>
+                <li>Deployed the application to production using Render.</li>
+            </ul>
 
-    <p>
-        <strong>Technologies:</strong> PHP, MySQL, HTML5, CSS3, JavaScript, Git, Render
-    </p>
+            <p>
+                <strong>Technologies:</strong>
+                PHP • MySQL • HTML5 • CSS3 • JavaScript • Git • Render
+            </p>
 
-    <p>
-        <strong>Live Demo:</strong>
-        <a href="https://novastore-1.onrender.com" target="_blank" rel="noopener noreferrer">
-            novastore-1.onrender.com
-        </a>
-    </p>
+            <p>
+                <strong>Live Demo:</strong>
+                <a href="https://novastore-1.onrender.com"
+                   target="_blank"
+                   rel="noopener noreferrer">
+                    novastore-1.onrender.com
+                </a>
+            </p>
 
-</div>
+        </div>
 
-<div class="card">
+        <!-- Project 2 -->
+        <div class="card">
 
-    <span>Data Analytics</span>
+            <span>Data Analytics</span>
 
-    <h3>Sales Dashboard</h3>
+            <h3>Sales Dashboard</h3>
 
-    <p>
-        An interactive business intelligence dashboard developed to analyse
-        sales performance, monitor KPIs and generate actionable business insights.
-    </p>
+            <p>
+                An interactive business intelligence dashboard developed to analyse
+                sales performance, monitor KPIs and generate actionable business insights.
+            </p>
 
-    <ul>
-        <li>Developed an interactive dashboard to analyse sales performance and present business insights.</li>
+            <ul>
+                <li>Developed an interactive dashboard to analyse sales performance and present business insights.</li>
 
-        <li>Processed and transformed sales data using Python and SQL for reporting and analysis.</li>
+                <li>Processed and transformed sales data using Python and SQL for reporting and analysis.</li>
 
-        <li>Created KPIs and visualisations to identify sales trends, revenue patterns and product performance.</li>
+                <li>Created KPIs and visualisations to identify sales trends, revenue patterns and product performance.</li>
 
-        <li>Applied data visualisation techniques to transform structured data into clear, decision-support information.</li>
-    </ul>
+                <li>Applied data visualisation techniques to transform structured data into clear, decision-support information.</li>
+            </ul>
 
-    <p>
-        <strong>Technologies:</strong> Python, SQL, Power BI, Data Visualisation, Git
-    </p>
+            <p>
+                <strong>Technologies:</strong>
+                Python • SQL • Power BI • Data Visualisation • Git
+            </p>
 
-    <p>
-        <strong>GitHub:</strong>
-        <a href="https://github.com/23008024/SalesDashboard" target="_blank" rel="noopener noreferrer">
-            github.com/23008024/SalesDashboard
-        </a>
-    </p>
+            <p>
+                <strong>GitHub:</strong>
+                <a href="https://github.com/23008024/SalesDashboard"
+                   target="_blank"
+                   rel="noopener noreferrer">
+                    github.com/23008024/SalesDashboard
+                </a>
+            </p>
 
-</div>
+        </div>
 
 
 
