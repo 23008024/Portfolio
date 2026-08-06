@@ -100,21 +100,44 @@ img { max-width: 100%; display: block; }
    below. Safe to delete the .navbar markup from index.html if
    you don't need it. */
 .navbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.9rem var(--gutter);
-  background: var(--ink-900);
-  border-bottom: 1px solid var(--line);
-  font-family: var(--font-mono);
-  font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.9rem var(--gutter);
+    background: var(--ink-900);
+    border-bottom: 1px solid var(--line);
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
 }
-.navbar .logo { font-family: var(--font-display); font-weight: 700; color: var(--amber); letter-spacing: 0.02em; }
-.navbar .menu { display: flex; gap: 1.5rem; }
-.navbar .menu a { color: var(--text-dim); transition: color 0.2s var(--ease); }
-.navbar .menu a:hover, .navbar .menu a:focus-visible { color: var(--amber); }
-.navbar .hamburger { display: none; cursor: pointer; font-size: 1.4rem; color: var(--text); }
 
+.navbar .logo {
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: var(--amber);
+    letter-spacing: 0.02em;
+}
+
+.navbar .menu {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.navbar .menu a {
+    color: var(--text-dim);
+    transition: color 0.2s var(--ease);
+}
+
+.navbar .menu a:hover,
+.navbar .menu a:focus-visible {
+    color: var(--amber);
+}
+
+.navbar .hamburger {
+    display: none;
+    cursor: pointer;
+    font-size: 1.4rem;
+    color: var(--text);
+}
 /* ---------- Real header / nav ---------- */
 header {
   position: sticky;
